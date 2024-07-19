@@ -5,7 +5,7 @@ import {
   Controller,
   Post,
 } from '@nestjs/common';
-import { CreateUserUseCase } from '../../../application/use-cases/user/create-user.use-case';
+import { CreateUserUseCase } from '../../../../application/use-cases/user/create-user.use-case';
 import { CreateUserDTO } from '../../dtos/user/create-user.dto';
 import { ResourceExistsError } from 'libs/core/src/errors';
 

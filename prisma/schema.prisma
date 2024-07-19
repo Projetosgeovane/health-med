@@ -14,7 +14,8 @@ datasource db {
 }
 
 model User {
-  id                    Int             @id @default(autoincrement())
+  id                    String          @id @default(uuid())
+  name                  String
   email                 String          @unique
   password              String
   crm                   String?
@@ -35,28 +36,28 @@ model Availability {
   createdAt DateTime  @default(now()) @map("created_at")
   updatedAt DateTime? @updatedAt @map("updated_at")
   deletedAt DateTime? @map("deleted_at")
-  userId    Int
+  userId    String
   user      User      @relation(fields: [userId], references: [id])
 }
 
 model Appointment {
-  id        Int       @id @default(autoincrement())
+  id        String    @id @default(uuid())
   date      String
   time      String
   status    String
   createdAt DateTime  @default(now()) @map("created_at")
   updatedAt DateTime? @updatedAt @map("updated_at")
   deletedAt DateTime? @map("deleted_at")
-  doctorId  Int
-  patientId Int
+  doctorId  String
+  patientId String
   doctor    User      @relation(name: "DoctorAppointments", fields: [doctorId], references: [id])
   patient   User      @relation(name: "PatientAppointments", fields: [patientId], references: [id])
 }
 
 model MedicalRecord {
-  id        Int       @id @default(autoincrement())
+  id        String    @id @default(uuid())
   document  String
-  patientId Int
+  patientId String
   createdAt DateTime  @default(now()) @map("created_at")
   updatedAt DateTime? @updatedAt @map("updated_at")
   deletedAt DateTime? @map("deleted_at")
