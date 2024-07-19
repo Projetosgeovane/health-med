@@ -2,7 +2,6 @@ import { Entity, UniqueEntityID } from 'libs/core/src/entities';
 import { Optional } from 'libs/core/src/types';
 
 export interface UserEntityProps {
-  id: string;
   name: string;
   email: string;
   password: string;
