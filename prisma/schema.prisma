@@ -19,6 +19,9 @@ model User {
   password              String
   crm                   String?
   cpf                   String?
+  createdAt             DateTime        @default(now()) @map("created_at")
+  updatedAt             DateTime?       @updatedAt @map("updated_at")
+  deletedAt             DateTime?       @map("deleted_at")
   availabilities        Availability[]
   appointmentsAsDoctor  Appointment[]   @relation("DoctorAppointments")
   appointmentsAsPatient Appointment[]   @relation("PatientAppointments")
@@ -26,27 +29,36 @@ model User {
 }
 
 model Availability {
-  id     Int    @id @default(autoincrement())
-  date   String
-  time   String
-  userId Int
-  user   User   @relation(fields: [userId], references: [id])
+  id        Int       @id @default(autoincrement())
+  date      String
+  time      String
+  createdAt DateTime  @default(now()) @map("created_at")
+  updatedAt DateTime? @updatedAt @map("updated_at")
+  deletedAt DateTime? @map("deleted_at")
+  userId    Int
+  user      User      @relation(fields: [userId], references: [id])
 }
 
 model Appointment {
-  id        Int    @id @default(autoincrement())
+  id        Int       @id @default(autoincrement())
   date      String
   time      String
   status    String
+  createdAt DateTime  @default(now()) @map("created_at")
+  updatedAt DateTime? @updatedAt @map("updated_at")
+  deletedAt DateTime? @map("deleted_at")
   doctorId  Int
   patientId Int
-  doctor    User   @relation(name: "DoctorAppointments", fields: [doctorId], references: [id])
-  patient   User   @relation(name: "PatientAppointments", fields: [patientId], references: [id])
+  doctor    User      @relation(name: "DoctorAppointments", fields: [doctorId], references: [id])
+  patient   User      @relation(name: "PatientAppointments", fields: [patientId], references: [id])
 }
 
 model MedicalRecord {
-  id        Int    @id @default(autoincrement())
+  id        Int       @id @default(autoincrement())
   document  String
   patientId Int
-  patient   User   @relation(fields: [patientId], references: [id])
+  createdAt DateTime  @default(now()) @map("created_at")
+  updatedAt DateTime? @updatedAt @map("updated_at")
+  deletedAt DateTime? @map("deleted_at")
+  patient   User      @relation(fields: [patientId], references: [id])
 }
