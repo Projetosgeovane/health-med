@@ -4,24 +4,24 @@ import {
 } from '@enablers/core/errors';
 import { Either, failure } from '@enablers/core/types';
 import { Injectable } from '@nestjs/common';
-import { UserRepository } from '../../repositories/user.repository';
+import { AppointmentRepository } from '../../repositories/appointment.repository';
 
-// interface EditUserUseCaseRequest {
+// interface EditAppointmentUseCaseRequest {
 //   id: string;
 //   status: string;
 // }
 
-type UserResponse = Either<ResourceExistsError, object>;
+type AppointmentResponse = Either<ResourceExistsError, object>;
 
 @Injectable()
-export class EditUserUseCase {
-  constructor(private readonly userRepository: UserRepository) { }
+export class EditAppointmentUseCase {
+  constructor(private readonly userRepository: AppointmentRepository) { }
 
-  async execute({ id }): Promise<UserResponse> {
+  async execute({ id }): Promise<AppointmentResponse> {
     const user = await this.userRepository.findById(id);
 
     if (!user) {
-      return failure(new ResourceNotFoundError('User not found'));
+      return failure(new ResourceNotFoundError('Appointment not found'));
     }
   }
 }
