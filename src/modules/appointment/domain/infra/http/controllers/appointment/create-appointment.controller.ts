@@ -5,24 +5,26 @@ import {
   Controller,
   Post,
 } from '@nestjs/common';
-import { CreateUserUseCase } from '../../../../application/use-cases/appointment/create-user.use-case';
-import { CreateUserDTO } from '../../dtos/appointment/create-user.dto';
+import { CreateAppointmentUseCase } from '../../../../application/use-cases/appointment/create-appointment.use-case';
+import { CreateAppointmentDTO } from '../../dtos/appointment/create-appointment.dto';
 import { ResourceExistsError } from 'libs/core/src/errors';
 
 @Controller()
-export class CreateUserController {
-  constructor(private readonly createUserUseCase: CreateUserUseCase) { }
+export class CreateAppointmentController {
+  constructor(
+    private readonly createAppointmentUseCase: CreateAppointmentUseCase,
+  ) { }
 
   @Post('user')
-  async handle(@Body() body: CreateUserDTO) {
-    const { name, email, password, crm, cpf } = body;
+  async handle(@Body() body: CreateAppointmentDTO) {
+    const { date, time, status, doctorId, patientId } = body;
 
-    const result = await this.createUserUseCase.execute({
-      name,
-      email,
-      password,
-      crm,
-      cpf,
+    const result = await this.createAppointmentUseCase.execute({
+      date,
+      time,
+      status,
+      doctorId,
+      patientId,
     });
 
     if (result.isFailure()) {
