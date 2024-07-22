@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { UserPersistenceModule } from '../persistence/persistence.module';
-import { CreateUserUseCase } from '../../application/use-cases/user/create-user.use-case';
-import { CreateUserController } from './controllers/user/create-user.controller';
+import { CreateUserUseCase } from '../../application/use-cases/appointment/create-user.use-case';
+import { CreateUserController } from './controllers/appointment/create-user.controller';
 
 @Module({
   imports: [UserPersistenceModule],
