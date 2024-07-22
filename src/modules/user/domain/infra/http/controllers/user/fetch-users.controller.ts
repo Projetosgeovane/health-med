@@ -29,9 +29,9 @@ export class FetchUsersController {
       throw new BadRequestException();
     }
 
-    const equipments = result.value.users.map(UserPresenter.toHTTP);
+    const users = result.value.users.map(UserPresenter.toHTTP);
     const totalRecords = result.value.totalRecords;
 
-    return { equipments, totalRecords };
+    return { users, totalRecords };
   }
 }
