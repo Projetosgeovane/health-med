@@ -40,6 +40,10 @@ export class AvailabilityEntity extends Entity<AvailabilityEntityProps> {
     return this.props.time;
   }
 
+  get userId() {
+    return this.props.userId;
+  }
+
   get createdAt() {
     return this.props.createdAt;
   }
@@ -63,6 +67,11 @@ export class AvailabilityEntity extends Entity<AvailabilityEntityProps> {
 
   setTime(time: string) {
     this.props.time = time;
+    this.touch();
+  }
+
+  setUserId(userId: string) {
+    this.props.userId = userId;
     this.touch();
   }
 
