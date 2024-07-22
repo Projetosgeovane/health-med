@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { UserRepository } from '../../repositories/user.repository';
-import { success } from '@enablers/core/types';
+import { Either, success } from '@enablers/core/types';
 
 interface FetchUsersUseCaseRequest {
   page: number;
@@ -8,17 +8,29 @@ interface FetchUsersUseCaseRequest {
   param: string;
 }
 
+type FetchUsersUseCaseResponse = Either<
+  null,
+  {
+    users: any[];
+    totalRecords: number;
+  }
+>;
+
 @Injectable()
 export class FetchUsersUseCase {
   constructor(private readonly userRepository: UserRepository) { }
 
-  async execute({ page, perPage, param }: FetchUsersUseCaseRequest) {
-    const { equipments, totalRecords } = await this.userRepository.findMany({
+  async execute({
+    page,
+    perPage,
+    param,
+  }: FetchUsersUseCaseRequest): Promise<FetchUsersUseCaseResponse> {
+    const { users, totalRecords } = await this.userRepository.findMany({
       page,
       param,
       perPage,
     });
 
-    return success({ equipments, totalRecords });
+    return success({ users, totalRecords });
   }
 }
