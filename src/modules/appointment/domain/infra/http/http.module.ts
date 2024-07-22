@@ -1,11 +1,11 @@
 import { Module } from '@nestjs/common';
-import { UserPersistenceModule } from '../persistence/persistence.module';
-import { CreateUserUseCase } from '../../application/use-cases/appointment/create-user.use-case';
-import { CreateUserController } from './controllers/appointment/create-appointment.controller';
+import { AppointmentPersistenceModule } from '../persistence/persistence.module';
+import { CreateAppointmentUseCase } from '../../application/use-cases/appointment/create-appointment.use-case';
+import { CreateAppointmentController } from './controllers/appointment/create-appointment.controller';
 
 @Module({
-  imports: [UserPersistenceModule],
-  controllers: [CreateUserController],
-  providers: [CreateUserUseCase],
+  imports: [AppointmentPersistenceModule],
+  controllers: [CreateAppointmentController],
+  providers: [CreateAppointmentUseCase],
 })
-export class UserHttpModule { }
+export class AppointmentHttpModule { }

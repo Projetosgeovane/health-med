@@ -1,19 +1,19 @@
 import { Module } from '@nestjs/common';
 import { DatabaseModule } from 'src/common/database/database.module';
-import { UserRepository } from '../../application/repositories/user.repository';
-import { PrismaUserRepositoryImpl } from './prisma/user/repositories/prisma-user-repository.impl';
+import { AppointmentRepository } from '../../application/repositories/appointment.repository';
+import { PrismaAppointmentRepositoryImpl } from './prisma/user/repositories/prisma-appointment-repository.impl';
 @Module({
   imports: [DatabaseModule],
   providers: [
     // --
-    PrismaUserRepositoryImpl,
+    PrismaAppointmentRepositoryImpl,
     // --
 
     {
-      useClass: PrismaUserRepositoryImpl,
-      provide: UserRepository,
+      useClass: PrismaAppointmentRepositoryImpl,
+      provide: AppointmentRepository,
     },
   ],
-  exports: [PrismaUserRepositoryImpl, UserRepository],
+  exports: [PrismaAppointmentRepositoryImpl, AppointmentRepository],
 })
-export class UserPersistenceModule { }
+export class AppointmentPersistenceModule { }
