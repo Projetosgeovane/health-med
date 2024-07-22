@@ -7,7 +7,7 @@ import { AppointmentEntity } from '../../../enterprise/appointment.entity';
 interface AppointmentRequest {
   date: string;
   time: string;
-  status: boolean;
+  status: string;
   doctorId: string;
   patientId: string;
 }

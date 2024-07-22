@@ -3,7 +3,7 @@ export class CreateAppointmentDTO {
 
   time: string;
 
-  status: boolean;
+  status: string;
 
   doctorId: string;
 

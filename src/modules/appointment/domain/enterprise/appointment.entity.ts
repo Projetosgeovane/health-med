@@ -4,7 +4,7 @@ import { Optional } from 'libs/core/src/types';
 export interface AppointmentEntityProps {
   date: string;
   time: string;
-  status: boolean;
+  status: string;
   doctorId: string;
   patientId: string;
 
@@ -76,7 +76,7 @@ export class AppointmentEntity extends Entity<AppointmentEntityProps> {
     this.props.time = time;
   }
 
-  setStatus(status: boolean) {
+  setStatus(status: string) {
     this.props.status = status;
   }
 
