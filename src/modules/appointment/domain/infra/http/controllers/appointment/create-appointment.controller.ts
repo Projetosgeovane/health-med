@@ -15,7 +15,7 @@ export class CreateAppointmentController {
     private readonly createAppointmentUseCase: CreateAppointmentUseCase,
   ) { }
 
-  @Post('user')
+  @Post('appointment')
   async handle(@Body() body: CreateAppointmentDTO) {
     const { date, time, status, doctorId, patientId } = body;
 

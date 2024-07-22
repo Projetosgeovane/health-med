@@ -2,8 +2,8 @@ import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/common/database/prisma/prisma.service';
 
 import { PrismaAvailabilityMapper } from '../mappers/prisma-availability.mapper';
-import { AvailabilityRepository } from 'src/modules/user/domain/application/repositories/availability.repository';
-import { AvailabilityEntity } from 'src/modules/user/domain/enterprise/availability.entity';
+import { AvailabilityRepository } from 'src/modules/availability/domain/application/repositories/availability.repository';
+import { AvailabilityEntity } from 'src/modules/availability/domain/enterprise/availability.entity';
 
 @Injectable()
 export class PrismaAvailabilityRepositoryImpl

@@ -1,6 +1,6 @@
 import { Prisma, Availability as PrismaAvailability } from '@prisma/client';
 import { UniqueEntityID } from 'libs/core/src/entities';
-import { AvailabilityEntity } from 'src/modules/user/domain/enterprise/availability.entity';
+import { AvailabilityEntity } from 'src/modules/availability/domain/enterprise/availability.entity';
 
 export class PrismaAvailabilityMapper {
   static toDomain(raw: PrismaAvailability): AvailabilityEntity {
