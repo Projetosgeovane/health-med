@@ -1,12 +1,47 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/common/database/prisma/prisma.service';
 import { PrismaAppointmentMapper } from '../mappers/prisma-appointment.mapper';
-import { AppointmentRepository } from 'src/modules/appointment/domain/application/repositories/appointment.repository';
+import {
+  AppointmentPaginationProps,
+  AppointmentRepository,
+} from 'src/modules/appointment/domain/application/repositories/appointment.repository';
 import { AppointmentEntity } from 'src/modules/appointment/domain/enterprise/appointment.entity';
 
 @Injectable()
 export class PrismaAppointmentRepositoryImpl implements AppointmentRepository {
   constructor(private readonly prisma: PrismaService) { }
+
+  async findMany({
+    page,
+    param,
+    perPage,
+  }: AppointmentPaginationProps): Promise<any> {
+    const [appointments, totalRecords] = await this.prisma.$transaction([
+      this.prisma.appointment.findMany({
+        where: {
+          OR: param ? [{ date: { contains: param } }] : undefined,
+          deletedAt: null,
+        },
+        orderBy: {
+          createdAt: 'desc',
+        },
+        take: perPage,
+        skip: (page - 1) * perPage,
+      }),
+      this.prisma.appointment.count({
+        where: {
+          OR: param ? [{ date: { contains: param } }] : undefined,
+          deletedAt: null,
+        },
+      }),
+    ]);
+
+    return {
+      appointments: appointments.map(PrismaAppointmentMapper.toDomain),
+      totalRecords,
+    };
+  }
+
   async create(data: AppointmentEntity): Promise<void> {
     const appointment = PrismaAppointmentMapper.toPrisma(data);
 
@@ -20,9 +55,22 @@ export class PrismaAppointmentRepositoryImpl implements AppointmentRepository {
   findManyRecent(): Promise<AppointmentEntity[]> {
     throw new Error('Method not implemented.');
   }
-  findById(): Promise<AppointmentEntity | null> {
-    throw new Error('Method not implemented.');
+
+  async findById(appointmentId: string): Promise<any | null> {
+    const appointment = await this.prisma.appointment.findUnique({
+      where: {
+        id: appointmentId,
+        deletedAt: null,
+      },
+    });
+
+    if (!appointment) {
+      return null;
+    }
+
+    return PrismaAppointmentMapper.toDomain(appointment);
   }
+
   delete(): Promise<void> {
     throw new Error('Method not implemented.');
   }

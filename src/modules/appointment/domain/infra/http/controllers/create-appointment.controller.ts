@@ -5,8 +5,8 @@ import {
   Controller,
   Post,
 } from '@nestjs/common';
-import { CreateAppointmentUseCase } from '../../../../application/use-cases/appointment/create-appointment.use-case';
-import { CreateAppointmentDTO } from '../../dtos/appointment/create-appointment.dto';
+import { CreateAppointmentUseCase } from '../../../application/use-cases/appointment/create-appointment.use-case';
+import { CreateAppointmentDTO } from '../dtos/appointment/create-appointment.dto';
 import { ResourceExistsError } from 'libs/core/src/errors';
 
 @Controller()
