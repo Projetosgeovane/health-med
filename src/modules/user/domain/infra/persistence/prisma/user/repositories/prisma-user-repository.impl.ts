@@ -49,8 +49,20 @@ export class PrismaUserRepositoryImpl implements UserRepository {
   findManyRecent(): Promise<UserEntity[]> {
     throw new Error('Method not implemented.');
   }
-  findById(): Promise<UserEntity | null> {
-    throw new Error('Method not implemented.');
+
+  async findById(userId: string): Promise<any | null> {
+    const user = await this.prisma.user.findUnique({
+      where: {
+        id: userId,
+        deletedAt: null,
+      },
+    });
+
+    if (!user) {
+      return null;
+    }
+
+    return PrismaUserMapper.toDomain(user);
   }
   delete(): Promise<void> {
     throw new Error('Method not implemented.');
