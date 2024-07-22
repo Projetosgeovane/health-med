@@ -64,6 +64,7 @@ export class PrismaUserRepositoryImpl implements UserRepository {
 
     return PrismaUserMapper.toDomain(user);
   }
+
   delete(): Promise<void> {
     throw new Error('Method not implemented.');
   }
