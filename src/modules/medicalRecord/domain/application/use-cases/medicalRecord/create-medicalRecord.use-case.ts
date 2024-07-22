@@ -5,10 +5,7 @@ import { MedicalRecordRepository } from '../../repositories/medicalRecord.reposi
 import { MedicalRecordEntity } from '../../../enterprise/medicalRecord.entity';
 
 interface MedicalRecordRequest {
-  date: string;
-  time: string;
-  status: string;
-  doctorId: string;
+  document: string;
   patientId: string;
 }
 
@@ -21,21 +18,15 @@ export class CreateMedicalRecordUseCase {
   ) { }
 
   async execute({
-    date,
-    time,
-    status,
-    doctorId,
+    document,
     patientId,
   }: MedicalRecordRequest): Promise<MedicalRecordResponse> {
-    const appointment = MedicalRecordEntity.instance({
-      date,
-      time,
-      status,
-      doctorId,
+    const medicalRecord = MedicalRecordEntity.instance({
+      document,
       patientId,
     });
 
-    await this.appointmentRepository.create(appointment);
+    await this.appointmentRepository.create(medicalRecord);
 
     return success({});
   }

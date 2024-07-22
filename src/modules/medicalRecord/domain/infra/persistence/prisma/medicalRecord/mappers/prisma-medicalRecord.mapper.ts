@@ -1,15 +1,12 @@
 import { Prisma, MedicalRecord as PrismaMedicalRecord } from '@prisma/client';
 import { UniqueEntityID } from 'libs/core/src/entities';
-import { MedicalRecordEntity } from 'src/modules/appointment/domain/enterprise/appointment.entity';
+import { MedicalRecordEntity } from 'src/modules/medicalRecord/domain/enterprise/medicalRecord.entity';
 
 export class PrismaMedicalRecordMapper {
   static toDomain(raw: PrismaMedicalRecord): MedicalRecordEntity {
     const appointment = MedicalRecordEntity.instance(
       {
-        date: raw.date,
-        time: raw.time,
-        status: raw.status,
-        doctorId: raw.doctorId,
+        document: raw.document,
         patientId: raw.patientId,
         createdAt: raw.createdAt,
         updatedAt: raw.updatedAt,
@@ -26,10 +23,7 @@ export class PrismaMedicalRecordMapper {
   ): Prisma.MedicalRecordUncheckedCreateInput {
     return {
       id: appointment.id.toValue(),
-      date: appointment.date,
-      time: appointment.time,
-      status: appointment.status,
-      doctorId: appointment.doctorId,
+      document: appointment.document,
       patientId: appointment.patientId,
       createdAt: appointment.createdAt,
       updatedAt: appointment.updatedAt,

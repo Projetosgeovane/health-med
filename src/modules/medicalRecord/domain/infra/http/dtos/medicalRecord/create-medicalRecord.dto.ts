@@ -1,11 +1,4 @@
 export class CreateMedicalRecordDTO {
-  date: string;
-
-  time: string;
-
-  status: string;
-
-  doctorId: string;
-
+  document: string;
   patientId: string;
 }

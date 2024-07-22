@@ -2,10 +2,7 @@ import { Entity, UniqueEntityID } from 'libs/core/src/entities';
 import { Optional } from 'libs/core/src/types';
 
 export interface MedicalRecordEntityProps {
-  date: string;
-  time: string;
-  status: string;
-  doctorId: string;
+  document: string;
   patientId: string;
 
   createdAt: Date;
@@ -18,12 +15,9 @@ export class MedicalRecordEntity extends Entity<MedicalRecordEntityProps> {
     props: Optional<MedicalRecordEntityProps, 'createdAt'>,
     id?: UniqueEntityID,
   ) {
-    const appointment = new MedicalRecordEntity(
+    const medicalRecord = new MedicalRecordEntity(
       {
-        date: props.date ?? null,
-        time: props.time ?? null,
-        status: props.status ?? null,
-        doctorId: props.doctorId ?? null,
+        document: props.document ?? null,
         patientId: props.patientId ?? null,
         createdAt: new Date(),
         updatedAt: props.updatedAt ?? null,
@@ -33,23 +27,11 @@ export class MedicalRecordEntity extends Entity<MedicalRecordEntityProps> {
       id,
     );
 
-    return appointment;
+    return medicalRecord;
   }
 
-  get date() {
-    return this.props.date;
-  }
-
-  get time() {
-    return this.props.time;
-  }
-
-  get status() {
-    return this.props.status;
-  }
-
-  get doctorId() {
-    return this.props.doctorId;
+  get document() {
+    return this.props.document;
   }
 
   get patientId() {
@@ -68,20 +50,8 @@ export class MedicalRecordEntity extends Entity<MedicalRecordEntityProps> {
     return this.props.deletedAt;
   }
 
-  setDate(date: string) {
-    this.props.date = date;
-  }
-
-  setTime(time: string) {
-    this.props.time = time;
-  }
-
-  setStatus(status: string) {
-    this.props.status = status;
-  }
-
-  setDoctorId(doctorId: string) {
-    this.props.doctorId = doctorId;
+  setDocument(document: string) {
+    this.props.document = document;
   }
 
   setPatientId(patientId: string) {

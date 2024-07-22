@@ -17,13 +17,10 @@ export class CreateMedicalRecordController {
 
   @Post('appointment')
   async handle(@Body() body: CreateMedicalRecordDTO) {
-    const { date, time, status, doctorId, patientId } = body;
+    const { document, patientId } = body;
 
     const result = await this.createMedicalRecordUseCase.execute({
-      date,
-      time,
-      status,
-      doctorId,
+      document,
       patientId,
     });
 
