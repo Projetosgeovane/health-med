@@ -9,4 +9,5 @@ export interface UserPaginationProps {
 
 export abstract class UserRepository extends BaseRepository<UserEntity> {
   abstract findMany(params: UserPaginationProps);
+  abstract findByEmail(email: string): Promise<UserEntity | null>;
 }

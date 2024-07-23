@@ -6,6 +6,8 @@ import { FetchUsersController } from './controllers/user/fetch-users.controller'
 import { FetchUsersUseCase } from '../../application/use-cases/user/fetch-users.use-case';
 import { FetchUserByIdUseCase } from '../../application/use-cases/user/fetch-user-by-id.use-case';
 import { FetchUserByIdController } from './controllers/user/fetch-user-by-id.controller';
+import { AuthenticateController } from './controllers/user/authenticate.controller';
+import { AuthenticateUseCase } from '../../application/use-cases/user/authenticate.use-case';
 
 @Module({
   imports: [UserPersistenceModule],
@@ -13,7 +15,13 @@ import { FetchUserByIdController } from './controllers/user/fetch-user-by-id.con
     CreateUserController,
     FetchUsersController,
     FetchUserByIdController,
+    AuthenticateController,
   ],
-  providers: [CreateUserUseCase, FetchUsersUseCase, FetchUserByIdUseCase],
+  providers: [
+    CreateUserUseCase,
+    FetchUsersUseCase,
+    FetchUserByIdUseCase,
+    AuthenticateUseCase,
+  ],
 })
 export class UserHttpModule { }

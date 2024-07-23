@@ -65,6 +65,20 @@ export class PrismaUserRepositoryImpl implements UserRepository {
     return PrismaUserMapper.toDomain(user);
   }
 
+  async findByEmail(email: string): Promise<UserEntity | null> {
+    const user = await this.prisma.user.findUnique({
+      where: {
+        email,
+      },
+    });
+
+    if (!user) {
+      return null;
+    }
+
+    return PrismaUserMapper.toDomain(user);
+  }
+
   delete(): Promise<void> {
     throw new Error('Method not implemented.');
   }
