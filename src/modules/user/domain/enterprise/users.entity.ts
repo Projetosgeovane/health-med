@@ -1,3 +1,4 @@
+import { UserRole } from '@prisma/client';
 import { Entity, UniqueEntityID } from 'libs/core/src/entities';
 import { Optional } from 'libs/core/src/types';
 
@@ -7,6 +8,7 @@ export interface UserEntityProps {
   password: string;
   crm?: string;
   cpf?: string;
+  role: UserRole;
 
   createdAt: Date;
   updatedAt?: Date | null;
@@ -25,6 +27,7 @@ export class UserEntity extends Entity<UserEntityProps> {
         password: props.password ?? null,
         crm: props.password ?? null,
         cpf: props.password ?? null,
+        role: props.role ?? null,
         createdAt: new Date(),
         updatedAt: props.updatedAt ?? null,
         deletedAt: props.deletedAt ?? null,
@@ -54,6 +57,10 @@ export class UserEntity extends Entity<UserEntityProps> {
 
   get cpf() {
     return this.props.cpf;
+  }
+
+  get role() {
+    return this.props.role;
   }
 
   get createdAt() {
@@ -94,6 +101,11 @@ export class UserEntity extends Entity<UserEntityProps> {
 
   setCpf(cpf: string) {
     this.props.cpf = cpf;
+    this.touch();
+  }
+
+  setRole(role: UserRole) {
+    this.props.role = role;
     this.touch();
   }
 

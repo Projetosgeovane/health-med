@@ -3,6 +3,7 @@ import { ResourceExistsError } from 'libs/core/src/errors';
 import { Either, success } from 'libs/core/src/types';
 import { UserRepository } from '../../repositories/user.repository';
 import { UserEntity } from '../../../enterprise/users.entity';
+import { UserRole } from '@prisma/client';
 
 interface UserRequest {
   name: string;
@@ -10,6 +11,7 @@ interface UserRequest {
   password: string;
   crm?: string;
   cpf?: string;
+  role: UserRole;
 }
 
 type UserResponse = Either<ResourceExistsError, object>;
@@ -24,6 +26,7 @@ export class CreateUserUseCase {
     password,
     crm,
     cpf,
+    role,
   }: UserRequest): Promise<UserResponse> {
     const user = UserEntity.instance({
       name,
@@ -31,6 +34,7 @@ export class CreateUserUseCase {
       password,
       crm,
       cpf,
+      role,
     });
 
     await this.userRepository.create(user);

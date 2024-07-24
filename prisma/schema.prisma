@@ -20,6 +20,7 @@ model User {
   password              String
   crm                   String?
   cpf                   String?
+  role                  UserRole
   createdAt             DateTime        @default(now()) @map("created_at")
   updatedAt             DateTime?       @updatedAt @map("updated_at")
   deletedAt             DateTime?       @map("deleted_at")
@@ -62,4 +63,9 @@ model MedicalRecord {
   updatedAt DateTime? @updatedAt @map("updated_at")
   deletedAt DateTime? @map("deleted_at")
   patient   User      @relation(fields: [patientId], references: [id])
+}
+
+enum UserRole {
+  DOCTOR
+  PATIENT
 }

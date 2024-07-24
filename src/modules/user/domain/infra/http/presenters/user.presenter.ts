@@ -8,6 +8,7 @@ export class UserPresenter {
       email: user.email,
       crm: user.crm,
       cpf: user.cpf,
+      role: user.role,
       createdAt: user.createdAt,
       updatedAt: user.updatedAt,
       deletedAt: user.deletedAt,

@@ -15,7 +15,7 @@ export class CreateUserController {
 
   @Post('user')
   async handle(@Body() body: CreateUserDTO) {
-    const { name, email, password, crm, cpf } = body;
+    const { name, email, password, crm, cpf, role } = body;
 
     const result = await this.createUserUseCase.execute({
       name,
@@ -23,6 +23,7 @@ export class CreateUserController {
       password,
       crm,
       cpf,
+      role,
     });
 
     if (result.isFailure()) {
