@@ -5,11 +5,14 @@ import {
   HttpCode,
   ParseIntPipe,
   Query,
+  UseGuards,
 } from '@nestjs/common';
 import { FetchUsersUseCase } from 'src/modules/user/domain/application/use-cases/user/fetch-users.use-case';
 import { UserPresenter } from '../../presenters/user.presenter';
+import { JwtAuthGuard } from 'src/modules/auth/jwt-auth-guard';
 
 @Controller('users')
+@UseGuards(JwtAuthGuard)
 export class FetchUsersController {
   constructor(private readonly fetchUsersUseCase: FetchUsersUseCase) { }
 

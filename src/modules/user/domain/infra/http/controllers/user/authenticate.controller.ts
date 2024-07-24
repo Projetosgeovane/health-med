@@ -1,12 +1,12 @@
-import { ResourceExistsError } from '@enablers/core/errors';
 import {
   BadRequestException,
   Body,
-  ConflictException,
   Controller,
   Post,
+  UnauthorizedException,
 } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
+import { WrongCredentialsError } from 'src/modules/user/domain/application/use-cases/errors/wrong-credentials-error';
 import { AuthenticateUseCase } from 'src/modules/user/domain/application/use-cases/user/authenticate.use-case';
 
 @Controller()
@@ -18,27 +18,26 @@ export class AuthenticateController {
 
   @Post('/authenticate')
   async handle(@Body() body: any) {
-    const { email } = body;
+    const { email, password } = body;
 
     const result = await this.authenticateUseCase.execute({
       email,
+      password,
     });
 
     if (result.isFailure()) {
       const error = result.value;
 
       switch (error.constructor) {
-        case ResourceExistsError: {
-          throw new ConflictException(error.message);
-        }
-        default: {
-          throw new BadRequestException();
-        }
+        case WrongCredentialsError:
+          throw new UnauthorizedException(error.message);
+        default:
+          throw new BadRequestException(error.message);
       }
     }
 
-    const token = this.jwt.sign({ email });
+    const accessToken = this.jwt.sign({ email });
 
-    return token;
+    return { accessToken: accessToken };
   }
 }
