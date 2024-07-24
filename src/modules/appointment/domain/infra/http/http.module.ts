@@ -6,6 +6,8 @@ import { FetchAppointmentByIdController } from './controllers/fetch-appointment-
 import { FetchAppointmentsController } from './controllers/fetch-appointments.controller';
 import { FetchAppointmentByIdUseCase } from '../../application/use-cases/appointment/fetch-appointment-by-id.use-case';
 import { FetchAppointmentsUseCase } from '../../application/use-cases/appointment/fetch-appointments.use-case';
+import { FetchAppointmentByDoctorController } from './controllers/fetch-appointments-by-doctor.controller';
+import { FetchAppointmentByDoctorUseCase } from '../../application/use-cases/appointment/fetch-appointment-by-doctor.use-case';
 
 @Module({
   imports: [AppointmentPersistenceModule],
@@ -13,11 +15,13 @@ import { FetchAppointmentsUseCase } from '../../application/use-cases/appointmen
     CreateAppointmentController,
     FetchAppointmentByIdController,
     FetchAppointmentsController,
+    FetchAppointmentByDoctorController,
   ],
   providers: [
     CreateAppointmentUseCase,
     FetchAppointmentByIdUseCase,
     FetchAppointmentsUseCase,
+    FetchAppointmentByDoctorUseCase,
   ],
 })
 export class AppointmentHttpModule { }
