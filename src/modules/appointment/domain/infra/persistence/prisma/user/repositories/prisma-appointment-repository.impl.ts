@@ -11,6 +11,33 @@ import { AppointmentEntity } from 'src/modules/appointment/domain/enterprise/app
 export class PrismaAppointmentRepositoryImpl implements AppointmentRepository {
   constructor(private readonly prisma: PrismaService) { }
 
+  async findByDoctor({ doctorID, page, perPage }): Promise<any> {
+    const [appointments, totalRecords] = await this.prisma.$transaction([
+      this.prisma.appointment.findMany({
+        where: {
+          doctorId: doctorID || undefined,
+          deletedAt: null,
+        },
+        orderBy: {
+          createdAt: 'desc',
+        },
+        take: perPage,
+        skip: (page - 1) * perPage,
+      }),
+      this.prisma.appointment.count({
+        where: {
+          doctorId: doctorID || undefined,
+          deletedAt: null,
+        },
+      }),
+    ]);
+
+    return {
+      appointments: appointments.map(PrismaAppointmentMapper.toDomain),
+      totalRecords,
+    };
+  }
+
   async findMany({
     page,
     param,

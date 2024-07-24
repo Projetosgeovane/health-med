@@ -17,7 +17,7 @@ export class AuthenticateController {
     private readonly authenticateUseCase: AuthenticateUseCase,
   ) { }
 
-  @Post('/authenticate')
+  @Post('/login')
   async handle(@Body() body: any) {
     const { email, password } = body;
 
