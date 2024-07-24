@@ -4,11 +4,14 @@ import {
   ConflictException,
   Controller,
   Post,
+  UseGuards,
 } from '@nestjs/common';
 import { CreateAppointmentUseCase } from '../../../application/use-cases/appointment/create-appointment.use-case';
 import { CreateAppointmentDTO } from '../dtos/appointment/create-appointment.dto';
 import { ResourceExistsError } from 'libs/core/src/errors';
-
+import { Roles } from 'src/modules/auth/roles.decorator';
+import { RolesGuard } from 'src/modules/auth/roles.guard';
+@UseGuards(RolesGuard)
 @Controller()
 export class CreateAppointmentController {
   constructor(
@@ -16,6 +19,7 @@ export class CreateAppointmentController {
   ) { }
 
   @Post('appointment')
+  @Roles('PATIENT')
   async handle(@Body() body: CreateAppointmentDTO) {
     const { date, time, status, doctorId, patientId } = body;
 

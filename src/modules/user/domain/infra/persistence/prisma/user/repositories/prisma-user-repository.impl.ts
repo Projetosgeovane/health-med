@@ -10,6 +10,33 @@ import { PrismaUserMapper } from '../mappers/prisma-user.mapper';
 @Injectable()
 export class PrismaUserRepositoryImpl implements UserRepository {
   constructor(private readonly prisma: PrismaService) { }
+
+  async findByRole({ role, page, perPage }): Promise<any> {
+    const [users, totalRecords] = await this.prisma.$transaction([
+      this.prisma.user.findMany({
+        where: {
+          role: role || undefined,
+          deletedAt: null,
+        },
+        orderBy: {
+          createdAt: 'desc',
+        },
+        take: perPage,
+        skip: (page - 1) * perPage,
+      }),
+      this.prisma.user.count({
+        where: {
+          role: role || undefined,
+          deletedAt: null,
+        },
+      }),
+    ]);
+
+    return {
+      users: users.map(PrismaUserMapper.toDomain),
+      totalRecords,
+    };
+  }
   async findMany({ page, param, perPage }: UserPaginationProps): Promise<any> {
     const [users, totalRecords] = await this.prisma.$transaction([
       this.prisma.user.findMany({

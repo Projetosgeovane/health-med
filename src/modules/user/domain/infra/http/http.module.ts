@@ -8,6 +8,8 @@ import { FetchUserByIdUseCase } from '../../application/use-cases/user/fetch-use
 import { FetchUserByIdController } from './controllers/user/fetch-user-by-id.controller';
 import { AuthenticateController } from './controllers/user/authenticate.controller';
 import { AuthenticateUseCase } from '../../application/use-cases/user/authenticate.use-case';
+import { FetchUsersByRoleController } from './controllers/user/fetch-users-by-role.controller';
+import { FetchUsersByRoleUseCase } from '../../application/use-cases/user/fetch-users-by-role.use-case';
 
 @Module({
   imports: [UserPersistenceModule],
@@ -15,12 +17,14 @@ import { AuthenticateUseCase } from '../../application/use-cases/user/authentica
     CreateUserController,
     FetchUsersController,
     FetchUserByIdController,
+    FetchUsersByRoleController,
     AuthenticateController,
   ],
   providers: [
     CreateUserUseCase,
     FetchUsersUseCase,
     FetchUserByIdUseCase,
+    FetchUsersByRoleUseCase,
     AuthenticateUseCase,
   ],
 })
