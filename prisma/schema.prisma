@@ -18,8 +18,8 @@ model User {
   name                  String
   email                 String          @unique
   password              String
-  crm                   String?
-  cpf                   String?
+  crm                   String?         @unique
+  cpf                   String?         @unique
   role                  UserRole
   createdAt             DateTime        @default(now()) @map("created_at")
   updatedAt             DateTime?       @updatedAt @map("updated_at")
