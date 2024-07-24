@@ -8,6 +8,7 @@ import {
 import { JwtService } from '@nestjs/jwt';
 import { WrongCredentialsError } from 'src/modules/user/domain/application/use-cases/errors/wrong-credentials-error';
 import { AuthenticateUseCase } from 'src/modules/user/domain/application/use-cases/user/authenticate.use-case';
+import { UserPresenter } from '../../presenters/user.presenter';
 
 @Controller()
 export class AuthenticateController {
@@ -36,7 +37,13 @@ export class AuthenticateController {
       }
     }
 
-    const accessToken = this.jwt.sign({ email });
+    const user = UserPresenter.toHTTP(result.value.user);
+
+    const accessToken = this.jwt.sign({
+      email: user?.email,
+      sub: user?.id,
+      role: user?.role,
+    });
 
     return { accessToken: accessToken };
   }

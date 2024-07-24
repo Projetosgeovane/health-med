@@ -9,7 +9,12 @@ interface AuthRequest {
   password: string;
 }
 
-type AuthResponse = Either<ResourceExistsError, object>;
+type AuthResponse = Either<
+  ResourceExistsError,
+  {
+    user: any;
+  }
+>;
 
 @Injectable()
 export class AuthenticateUseCase {
