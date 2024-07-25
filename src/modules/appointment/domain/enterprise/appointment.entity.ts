@@ -68,31 +68,42 @@ export class AppointmentEntity extends Entity<AppointmentEntityProps> {
     return this.props.deletedAt;
   }
 
-  setDate(date: string) {
+  private touch() {
+    this.props.updatedAt = new Date();
+  }
+
+  set date(date: string) {
     this.props.date = date;
+    this.touch();
   }
 
-  setTime(time: string) {
+  set time(time: string) {
     this.props.time = time;
+    this.touch();
   }
 
-  setStatus(status: string) {
+  set status(status: string) {
     this.props.status = status;
+    this.touch();
   }
 
-  setDoctorId(doctorId: string) {
+  set doctorId(doctorId: string) {
     this.props.doctorId = doctorId;
+    this.touch();
   }
 
-  setPatientId(patientId: string) {
+  set patientId(patientId: string) {
     this.props.patientId = patientId;
+    this.touch();
   }
 
-  setUpdatedAt(updatedAt: Date) {
+  set updatedAt(updatedAt: Date) {
     this.props.updatedAt = updatedAt;
+    this.touch();
   }
 
-  setDeletedAt(deletedAt: Date) {
+  set deletedAt(deletedAt: Date) {
     this.props.deletedAt = deletedAt;
+    this.touch();
   }
 }

@@ -76,9 +76,20 @@ export class PrismaAppointmentRepositoryImpl implements AppointmentRepository {
       data: { ...appointment },
     });
   }
-  save(): Promise<void> {
-    throw new Error('Method not implemented.');
+
+  async save(body: AppointmentEntity): Promise<void> {
+    const appointment = PrismaAppointmentMapper.toPrisma(body);
+
+    await this.prisma.appointment.update({
+      where: {
+        id: appointment.id,
+      },
+      data: {
+        ...appointment,
+      },
+    });
   }
+
   findManyRecent(): Promise<AppointmentEntity[]> {
     throw new Error('Method not implemented.');
   }
