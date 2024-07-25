@@ -15,7 +15,6 @@ import { Request } from 'express';
 
 interface User {
   id: string;
-  // other properties
 }
 
 interface CustomRequest extends Request {
