@@ -6,7 +6,7 @@ import {
   HttpCode,
   NotFoundException,
   Param,
-  Patch,
+  Put,
   Req,
 } from '@nestjs/common';
 import { CancelAppointmentDTO } from '../dtos/appointment/cancel-appointment.dto';
@@ -28,7 +28,7 @@ export class UpdateAppointmentCancelController {
     private readonly updateAppointmentCancelUseCase: UpdateAppointmentCancelUseCase,
   ) { }
 
-  @Patch('appointments:id/status')
+  @Put('appointments:id/cancel')
   @HttpCode(204)
   async handle(
     @Param('id') appointmentID: string,
