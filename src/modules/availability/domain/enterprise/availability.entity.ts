@@ -60,22 +60,22 @@ export class AvailabilityEntity extends Entity<AvailabilityEntityProps> {
     this.props.updatedAt = new Date();
   }
 
-  setDate(date: string) {
+  set date(date: string) {
     this.props.date = date;
     this.touch();
   }
 
-  setTime(time: string) {
+  set time(time: string) {
     this.props.time = time;
     this.touch();
   }
 
-  setUserId(userId: string) {
+  set userId(userId: string) {
     this.props.userId = userId;
     this.touch();
   }
 
-  setDeletedAt(deletedAt: Date) {
+  set deletedAt(deletedAt: Date) {
     this.props.deletedAt = deletedAt;
     this.touch();
   }

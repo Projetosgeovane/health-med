@@ -50,19 +50,19 @@ export class MedicalRecordEntity extends Entity<MedicalRecordEntityProps> {
     return this.props.deletedAt;
   }
 
-  setDocument(document: string) {
+  set document(document: string) {
     this.props.document = document;
   }
 
-  setPatientId(patientId: string) {
+  set patientId(patientId: string) {
     this.props.patientId = patientId;
   }
 
-  setUpdatedAt(updatedAt: Date) {
+  set updatedAt(updatedAt: Date) {
     this.props.updatedAt = updatedAt;
   }
 
-  setDeletedAt(deletedAt: Date) {
+  set deletedAt(deletedAt: Date) {
     this.props.deletedAt = deletedAt;
   }
 }

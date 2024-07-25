@@ -79,37 +79,37 @@ export class UserEntity extends Entity<UserEntityProps> {
     this.props.updatedAt = new Date();
   }
 
-  setName(name: string) {
+  set name(name: string) {
     this.props.name = name;
     this.touch();
   }
 
-  setEmail(email: string) {
+  set email(email: string) {
     this.props.email = email;
     this.touch();
   }
 
-  setPassword(password: string) {
+  set password(password: string) {
     this.props.password = password;
     this.touch();
   }
 
-  setCrm(crm: string) {
+  set crm(crm: string) {
     this.props.crm = crm;
     this.touch();
   }
 
-  setCpf(cpf: string) {
+  set cpf(cpf: string) {
     this.props.cpf = cpf;
     this.touch();
   }
 
-  setRole(role: UserRole) {
+  set role(role: UserRole) {
     this.props.role = role;
     this.touch();
   }
 
-  setDeletedAt(deletedAt: Date) {
+  set deletedAt(deletedAt: Date) {
     this.props.deletedAt = deletedAt;
     this.touch();
   }
