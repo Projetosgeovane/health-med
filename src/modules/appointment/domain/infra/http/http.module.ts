@@ -8,6 +8,10 @@ import { FetchAppointmentByIdUseCase } from '../../application/use-cases/appoint
 import { FetchAppointmentsUseCase } from '../../application/use-cases/appointment/fetch-appointments.use-case';
 import { FetchAppointmentByDoctorController } from './controllers/fetch-appointments-by-doctor.controller';
 import { FetchAppointmentByDoctorUseCase } from '../../application/use-cases/appointment/fetch-appointment-by-doctor.use-case';
+import { UpdateAppointmentCancelController } from './controllers/update-appointment-cancel.controller';
+import { UpdateAppointmentStatusController } from './controllers/update-appointment-status.controller';
+import { UpdateAppointmentCancelUseCase } from '../../application/use-cases/appointment/update-appointment-cancel.use-case';
+import { UpdateAppointmentStatusUseCase } from '../../application/use-cases/appointment/update-appointment-status.use-case';
 
 @Module({
   imports: [AppointmentPersistenceModule],
@@ -16,12 +20,16 @@ import { FetchAppointmentByDoctorUseCase } from '../../application/use-cases/app
     FetchAppointmentByIdController,
     FetchAppointmentsController,
     FetchAppointmentByDoctorController,
+    UpdateAppointmentCancelController,
+    UpdateAppointmentStatusController,
   ],
   providers: [
     CreateAppointmentUseCase,
     FetchAppointmentByIdUseCase,
     FetchAppointmentsUseCase,
     FetchAppointmentByDoctorUseCase,
+    UpdateAppointmentCancelUseCase,
+    UpdateAppointmentStatusUseCase,
   ],
 })
 export class AppointmentHttpModule { }
