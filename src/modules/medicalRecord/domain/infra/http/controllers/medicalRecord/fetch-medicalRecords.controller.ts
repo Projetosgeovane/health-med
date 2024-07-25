@@ -5,18 +5,24 @@ import {
   HttpCode,
   ParseIntPipe,
   Query,
+  UseGuards,
 } from '@nestjs/common';
 import { FetchMedicalRecordsUseCase } from 'src/modules/medicalRecord/domain/application/use-cases/medicalRecord/fetch-medicalRecords.use-case';
 import { MedicalRecordPresenter } from '../../presenters/medicalRecord.presenter';
-
-@Controller('medicalRecords')
+import { Roles } from 'src/modules/auth/roles.decorator';
+import { UserRole } from '@prisma/client';
+import { RolesGuard } from 'src/modules/auth/roles.guard';
+@UseGuards(RolesGuard)
+@Controller()
 export class FetchMedicalRecordsController {
   constructor(
     private readonly fetchMedicalRecordsUseCase: FetchMedicalRecordsUseCase,
   ) { }
 
-  @Get()
+  @Get('medicalRecords')
   @HttpCode(200)
+  @Roles(UserRole.DOCTOR)
+  @Roles(UserRole.PATIENT)
   async handle(
     @Query('page', ParseIntPipe) page: number,
     @Query('perPage', ParseIntPipe) perPage: number,

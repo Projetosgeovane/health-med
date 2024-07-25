@@ -4,11 +4,15 @@ import {
   ConflictException,
   Controller,
   Post,
+  UseGuards,
 } from '@nestjs/common';
 import { CreateMedicalRecordUseCase } from '../../../../application/use-cases/medicalRecord/create-medicalRecord.use-case';
 import { CreateMedicalRecordDTO } from '../../dtos/medicalRecord/create-medicalRecord.dto';
 import { ResourceExistsError } from 'libs/core/src/errors';
-
+import { RolesGuard } from 'src/modules/auth/roles.guard';
+import { Roles } from 'src/modules/auth/roles.decorator';
+import { UserRole } from '@prisma/client';
+@UseGuards(RolesGuard)
 @Controller()
 export class CreateMedicalRecordController {
   constructor(
@@ -16,6 +20,7 @@ export class CreateMedicalRecordController {
   ) { }
 
   @Post('appointment')
+  @Roles(UserRole.PATIENT)
   async handle(@Body() body: CreateMedicalRecordDTO) {
     const { document, patientId } = body;
 
