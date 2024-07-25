@@ -51,12 +51,24 @@ export class PrismaAvailabilityRepositoryImpl
       data: { ...availability },
     });
   }
-  save(): Promise<void> {
-    throw new Error('Method not implemented.');
+
+  async save(body: AvailabilityEntity): Promise<void> {
+    const availability = PrismaAvailabilityMapper.toPrisma(body);
+
+    await this.prisma.availability.update({
+      where: {
+        id: availability.id,
+      },
+      data: {
+        ...availability,
+      },
+    });
   }
+
   findManyRecent(): Promise<AvailabilityEntity[]> {
     throw new Error('Method not implemented.');
   }
+
   async findById(availabilityId: string): Promise<any | null> {
     const availability = await this.prisma.availability.findUnique({
       where: {
