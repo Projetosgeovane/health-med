@@ -11,13 +11,13 @@ import {
 import { FetchUsersByRoleUseCase } from 'src/modules/user/domain/application/use-cases/user/fetch-users-by-role.use-case';
 import { UserPresenter } from '../../presenters/user.presenter';
 
-@Controller('users/role')
+@Controller()
 export class FetchUsersByRoleController {
   constructor(
     private readonly fetchUsersByRoleUseCase: FetchUsersByRoleUseCase,
   ) { }
 
-  @Get()
+  @Get('users/role')
   @HttpCode(200)
   async handle(
     @Query('page', ParseIntPipe) page: number,

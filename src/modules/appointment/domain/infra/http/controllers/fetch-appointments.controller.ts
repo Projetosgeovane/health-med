@@ -5,17 +5,20 @@ import {
   HttpCode,
   ParseIntPipe,
   Query,
+  UseGuards,
 } from '@nestjs/common';
 import { FetchAppointmentsUseCase } from 'src/modules/appointment/domain/application/use-cases/appointment/fetch-appointments.use-case';
 import { AppointmentPresenter } from '../presenters/appointment.presenter';
+import { RolesGuard } from 'src/modules/auth/roles.guard';
 
-@Controller('appointments')
+@UseGuards(RolesGuard)
+@Controller()
 export class FetchAppointmentsController {
   constructor(
     private readonly fetchAppointmentsUseCase: FetchAppointmentsUseCase,
   ) { }
 
-  @Get()
+  @Get('appointments')
   @HttpCode(200)
   async handle(
     @Query('page', ParseIntPipe) page: number,

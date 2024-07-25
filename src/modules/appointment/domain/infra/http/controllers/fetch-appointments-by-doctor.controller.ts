@@ -8,18 +8,23 @@ import {
   Param,
   ParseIntPipe,
   Query,
+  UseGuards,
 } from '@nestjs/common';
 import { AppointmentPresenter } from '../presenters/appointment.presenter';
 import { FetchAppointmentByDoctorUseCase } from '../../../application/use-cases/appointment/fetch-appointment-by-doctor.use-case';
-
-@Controller('appointment/doctor/:id')
+import { RolesGuard } from 'src/modules/auth/roles.guard';
+import { Roles } from 'src/modules/auth/roles.decorator';
+import { UserRole } from '@prisma/client';
+@UseGuards(RolesGuard)
+@Controller()
 export class FetchAppointmentByDoctorController {
   constructor(
     private readonly fetchAppointmentByDoctorUseCase: FetchAppointmentByDoctorUseCase,
   ) { }
 
-  @Get()
+  @Get('appointment/doctor/:id')
   @HttpCode(200)
+  @Roles(UserRole.DOCTOR)
   async handle(
     @Query('page', ParseIntPipe) page: number,
     @Query('perPage', ParseIntPipe) perPage: number,

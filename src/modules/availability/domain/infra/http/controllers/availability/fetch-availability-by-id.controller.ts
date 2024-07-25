@@ -6,18 +6,23 @@ import {
   HttpCode,
   NotFoundException,
   Param,
+  UseGuards,
 } from '@nestjs/common';
 import { AvailabilityPresenter } from '../../presenters/availability.presenter';
 import { FetchAvailabilityByIdUseCase } from 'src/modules/availability/domain/application/use-cases/availability/fetch-availabilitys-by-id.use-case';
-
-@Controller('availability/:id')
+import { Roles } from 'src/modules/auth/roles.decorator';
+import { UserRole } from '@prisma/client';
+import { RolesGuard } from 'src/modules/auth/roles.guard';
+@UseGuards(RolesGuard)
+@Controller()
 export class FetchAvailabilityByIdController {
   constructor(
     private readonly fetchAvailabilityByIdUseCase: FetchAvailabilityByIdUseCase,
   ) { }
 
-  @Get()
+  @Get('availability/:id')
   @HttpCode(200)
+  @Roles(UserRole.DOCTOR)
   async handle(@Param('id') id: string) {
     const result = await this.fetchAvailabilityByIdUseCase.execute({
       availabilityID: id,
