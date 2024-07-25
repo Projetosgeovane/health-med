@@ -84,7 +84,11 @@ export class PrismaAvailabilityRepositoryImpl
     return PrismaAvailabilityMapper.toDomain(availability);
   }
 
-  delete(): Promise<void> {
-    throw new Error('Method not implemented.');
+  async delete(id: string): Promise<void> {
+    await this.prisma.availability.delete({
+      where: {
+        id,
+      },
+    });
   }
 }

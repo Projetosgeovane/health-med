@@ -7,6 +7,8 @@ import { FetchAvailabilitysUseCase } from '../../application/use-cases/availabil
 import { FetchAvailabilityByIdController } from './controllers/availability/fetch-availability-by-id.controller';
 import { FetchAvailabilityByIdUseCase } from '../../application/use-cases/availability/fetch-availabilitys-by-id.use-case';
 import { EditAvailabilityUseCase } from '../../application/use-cases/availability/edit-availability.use-case';
+import { RemoveAvailabilityController } from './controllers/availability/remove-availability.controller';
+import { RemoveAvailabilityUseCase } from '../../application/use-cases/availability/remove-availability.use-case';
 
 @Module({
   imports: [AvailabilityPersistenceModule],
@@ -15,12 +17,14 @@ import { EditAvailabilityUseCase } from '../../application/use-cases/availabilit
     FetchAvailabilitysController,
     FetchAvailabilityByIdController,
     EditAvailabilityUseCase,
+    RemoveAvailabilityController,
   ],
   providers: [
     CreateAvailabilityUseCase,
     FetchAvailabilitysUseCase,
     FetchAvailabilityByIdUseCase,
     EditAvailabilityUseCase,
+    RemoveAvailabilityUseCase,
   ],
 })
 export class AvailabilityHttpModule { }
