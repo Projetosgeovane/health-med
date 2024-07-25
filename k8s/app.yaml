@@ -1,0 +1,71 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app
+  labels:
+    app: app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: app
+  template:
+    metadata:
+      labels:
+        app: app
+    spec:
+      containers:
+        - name: app
+          image: 412037985376.dkr.ecr.us-east-1.amazonaws.com/health-med:latest
+          ports:
+            - containerPort: 3000
+          env:
+            - name: DATABASE_URL
+              value: "mysql://admin:password@health-med.ceifdjdea5m3.us-east-1.rds.amazonaws.com:3306/health-med"
+            - name: JWT_PRIVATE_KEY
+              value: "LS0tLS1CRUdJTiBQUklWQVRFIEtFWS0tLS0tDQpNSUlFdlFJQkFEQU5CZ2txaGtpRzl3MEJBUUVQUFTQ0JLY3dnZ1NqQWdFQUFvSUJBUUM5dDhsd2d5RC92VHVyDQpWTzQ5U0dQQ0x4TUJzYnRzSDhkYzZGekF4S2xPczdHdHVhL2VUVFJ4YTM0RGlBZm1FYys1Njc5dVIvV1VtbmUvDQpmZ0oyd1BoZmZwR0pkY2V3dStWa01mMGlhZGZXL3BVWnA4c1l4M0EyR1lLYXRFR1hSemRNWE1GYzJwRUMyZHIvDQpYNEVPejcwUmZ5WkplbGhqQ3dJMXgzWFduelBTM1oxaHVHTkFhRHZKejB5M0xGNkJiTVVsa3J3ZkdYUGl3OW1xDQpMVDkrWjE2Y0V4d3lIdEQ4V3h6MjJLTW8rcXpmNFhtWjBBT1ppV2hFeUI5WXZWK2IxUk9xK3JsaTZGSm5hcDRkDQpGN1FHK0Rxem03dC9HNkJialNkUzU0bXpzTmtzcFFjYkxFR1VsOURmOS9vMm1Wd1Y4YmFFQjUrU09EM0RydFRmDQpEN0RFcEp0ZEFnTUJBQUVDZ2dFQVdTMkkvT0JHcEsvNDJtS0QwajZ5MWRaMjRyYisyS1pmZWlhbll0Mk9rRFliDQpjUVAxelZNUk1iZExkckY4dFFMdVdBQ2U3V0haNkU1cnQ1R3Q2dEJ1YjhUNCtGcHEwWUtoSTJYMERUY2ZoQ29MDQpRQklGZjlKUHhyNWJEQWxyUTRid1VXN1FYYXRIdXNWWkVlMThwcyt6bWdQZ3BXMWpHcnRVQUorUG5xRWJKU1RDDQpCd2YyQklBeTcyZDQ4MENJdXU0ZjdKaXBqaHZmRHkyMkJDeDdwamtrY1FxTHlFVFpjekd2VVE1REw0aGdadGdhDQpGN29CVlhReEFiMUJ6U0h2ZHdxbk5DMVFSY1pzaHdyV0g5aFRObmRleEpHWUtiOHpySEhyK2hyenFnS1ZPaE5KDQpsRmJwZitKZ3o5T1RQbXpON1diWjZaZU1HbU1UbDJta1VYNThIbWNLUVFLQmdRRDcvN2dqcGtkZ2tGTi94L3ZUDQpHTVJ1cGxlVm51SDdTNFhoc0g5TnNFWHZ2WnV1QTNBem5Xc3VrSTdvOVZJemtQOTFQRDJyWmliQkhKYlEzN2IzDQpmSHljRnJJakh3K29kajhVUWdYVjEzS2pCakhoMmI0amozMU54bXY3endzVGdlTnVQQ3NFZGRSbGo3eVg2Tit1DQpORHBxaS9lckdBR0o3MXhKd2FVcjdVNStaUUtCZ1FEQXV1czNHdmRDeFhSOEZvUmtzRGQvSk5SSmZ4ZGVMRE8wDQpQOHV5TWEyOEdlellSMDdSanNiMVZ6Tk9CZVBPN01sZzB5Ukc5Qm1Od3hMUCtVQm44cmd5Y3YwMS9meHh5WHlKDQpEV1JQeHhlNUhoeVR1d0tId0xKMUxmVElraVNqMXUya3RTODZYd2pSc1JkR3NwTnU4SVNnclp2TW83UlJVVmh5DQpJQm9VcGRrOW1RS0JnUURnM1I4RE1LMGdqYWowclE4WkgxQ3BLK1diclZzWlVocjFlUGtmNmR0K1FrTlkwOWliDQpOaTBlTUFCV0FCS0owU2tqQTg1RDA3TmhQcEdWY1F0amE4SUZ4bnJPdkRqTXFqYy9iR3FvbHNmRWtSS1I1aXEwDQpzS1d2Y1ErS2N3WC9Namd2ZGFFdEtiZU5xT1V3Nkt3d1ZvcUo2THZvQUZQZk1hZTRhUU5xWHlkYndRS0JnRnJSDQorbk9lUm5SMW5kMjNzcTNNQ0dybXpRN1JVQTYxbjZ2S0FGQTVidGhjRXlzYjl6MXpIYmlSWGdEZmI2bWNGWTJHDQpFZXRKcmgwS2x2dmdSZ1IxOFd6OG1PdnZneDJQeUJyQmI4clVWQTZNN1FTRXRMMktCYzZJV0hpSHZiSmpYdHNsDQo4bHA4WENpTVhoNlhtamhHS1FtYXBmZDZFVWZjb0dRdlVucjJhSGZKQW9HQVJTcitENG95V0JKa0o0V2Q3alhVDQo1Y0JlbGlITzFsVFR1blh2UFNHdlA2dXRZT3haMzcyeGp1SzdoSEphaDJOdmE0dDVORFFvZFU1NVIwVnlDcTZ4DQpKUm1OVVl3cjJEVWQ5dVI5WmF6Tk1sa0FsYzRUNFhkelZTRTJuanNtTHlsWUY3ZE9DOXFCeldMaXFMVXJZU1hPDQpUVGVnb1Bqd1d5Qi9pdDFEUzRSRXU0dz0NCi0tLS0tRU5EIFBSSVZBVEUgS0VZLS0tLS0NCg=="
+            - name: JWT_PUBLIC_KEY
+              value: "LS0tLS1CRUdJTiBQVUJMSUMgS0VZLS0tLS0NCk1JSUJJakFOQmdrcWhraUc5dzBCQVFFRkFBT0NBUThBTUlJQkNnS0NBUUVBdmJmSmNJTWcvNzA3cTFUdVBVaGoNCndpOFRBYkc3YkIvSFhPaGN3TVNwVHJPeHJibXYzazAwY1d0K0E0Z0g1aEhQdWV1L2JrZjFsSnAzdjM0Q2RzRDQNClgzNlJpWFhIc0x2bFpESDlJbW5YMXY2VkdhZkxHTWR3TmhtQ21yUkJsMGMzVEZ6QlhOcVJBdG5hLzErQkRzKzkNCkVYOG1TWHBZWXdzQ05jZDExcDh6MHQyZFliaGpRR2c3eWM5TXR5eGVnV3pGSlpLOEh4bHo0c1BacWkwL2ZtZGUNCm5CTWNNaDdRL0ZzYzl0aWpLUHFzMytGNW1kQURtWWxvUk1nZldMMWZtOVVUcXZxNVl1aFNaMnFlSFJlMEJ2ZzYNCnM1dTdmeHVnVzQwblV1ZUpzN0RaTEtVSEd5eEJsSmZRMy9mNk5wbGNGZkcyaEFlZmtqZzl3NjdVM3crd3hLU2INClhRSURBUUFCDQotLS0tLUVORCBQVUJMSUMgS0VZLS0tLS0NCg=="
+          resources:
+            requests:
+              memory: "256Mi"
+              cpu: "100m"
+            limits:
+              memory: "512Mi"
+              cpu: "250m"
+      restartPolicy: Always
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: app
+  labels:
+    app: app
+spec:
+  type: LoadBalancer
+  ports:
+    - port: 80
+      targetPort: 3000
+      protocol: TCP
+  selector:
+    app: app
+---
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: app-hpa
+  namespace: default
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: app
+  minReplicas: 1
+  maxReplicas: 10
+  metrics:
+    - type: Resource
+      resource:
+        name: cpu
+        target:
+          type: Utilization
+          averageUtilization: 80
