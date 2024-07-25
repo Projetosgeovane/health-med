@@ -5,6 +5,9 @@ export class AppointmentPresenter {
     return {
       id: appointment.id.toValue(),
       date: appointment.date,
+      time: appointment.time,
+      status: appointment.status,
+      cancelReason: appointment.cancelReason,
       doctorId: appointment.doctorId,
       patientId: appointment.patientId,
       createdAt: appointment.createdAt,

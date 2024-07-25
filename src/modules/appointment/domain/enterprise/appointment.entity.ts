@@ -5,6 +5,7 @@ export interface AppointmentEntityProps {
   date: string;
   time: string;
   status: string;
+  cancelReason?: string;
   doctorId: string;
   patientId: string;
 
@@ -23,6 +24,7 @@ export class AppointmentEntity extends Entity<AppointmentEntityProps> {
         date: props.date ?? null,
         time: props.time ?? null,
         status: props.status ?? null,
+        cancelReason: props.cancelReason ?? null,
         doctorId: props.doctorId ?? null,
         patientId: props.patientId ?? null,
         createdAt: new Date(),
@@ -46,6 +48,10 @@ export class AppointmentEntity extends Entity<AppointmentEntityProps> {
 
   get status() {
     return this.props.status;
+  }
+
+  get cancelReason() {
+    return this.props.cancelReason;
   }
 
   get doctorId() {
@@ -84,6 +90,11 @@ export class AppointmentEntity extends Entity<AppointmentEntityProps> {
 
   set status(status: string) {
     this.props.status = status;
+    this.touch();
+  }
+
+  set cancelReason(cancelReason: string) {
+    this.props.cancelReason = cancelReason;
     this.touch();
   }
 
