@@ -8,6 +8,8 @@ import { z } from 'zod';
 
 const tokenSchema = z.object({
   email: z.string().email(),
+  sub: z.string(),
+  role: z.string(),
 });
 
 type TokenSchema = z.infer<typeof tokenSchema>;

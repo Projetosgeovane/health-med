@@ -5,12 +5,16 @@ import { AvailabilityModule } from './modules/availability/domain/availability.m
 import { AppointmentModule } from './modules/appointment/appointment.module';
 import { MedicalRecordModule } from './modules/medicalRecord/medicalRecord.module';
 import { envSchema } from './env';
+import { MulterModule } from '@nestjs/platform-express';
 
 @Module({
   imports: [
     ConfigModule.forRoot({
       validate: (env) => envSchema.parse(env),
       isGlobal: true,
+    }),
+    MulterModule.register({
+      dest: './uploads',
     }),
     UserModule,
     AvailabilityModule,

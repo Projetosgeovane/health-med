@@ -9,6 +9,7 @@ import { FetchAvailabilityByIdUseCase } from '../../application/use-cases/availa
 import { EditAvailabilityUseCase } from '../../application/use-cases/availability/edit-availability.use-case';
 import { RemoveAvailabilityController } from './controllers/availability/remove-availability.controller';
 import { RemoveAvailabilityUseCase } from '../../application/use-cases/availability/remove-availability.use-case';
+import { EditAvailabilityController } from './controllers/availability/edit-availability.controller';
 
 @Module({
   imports: [AvailabilityPersistenceModule],
@@ -16,7 +17,7 @@ import { RemoveAvailabilityUseCase } from '../../application/use-cases/availabil
     CreateAvailabilityController,
     FetchAvailabilitysController,
     FetchAvailabilityByIdController,
-    EditAvailabilityUseCase,
+    EditAvailabilityController,
     RemoveAvailabilityController,
   ],
   providers: [
