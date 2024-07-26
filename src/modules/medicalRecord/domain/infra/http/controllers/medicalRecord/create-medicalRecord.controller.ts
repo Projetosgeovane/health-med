@@ -4,28 +4,49 @@ import {
   ConflictException,
   Controller,
   Post,
+  Req,
+  UploadedFile,
+  UploadedFiles,
   UseGuards,
+  UseInterceptors,
 } from '@nestjs/common';
 import { CreateMedicalRecordUseCase } from '../../../../application/use-cases/medicalRecord/create-medicalRecord.use-case';
-import { CreateMedicalRecordDTO } from '../../dtos/medicalRecord/create-medicalRecord.dto';
 import { ResourceExistsError } from 'libs/core/src/errors';
-import { RolesGuard } from 'src/modules/auth/roles.guard';
+import { FileInterceptor } from '@nestjs/platform-express';
 import { Roles } from 'src/modules/auth/roles.decorator';
 import { UserRole } from '@prisma/client';
-@UseGuards(RolesGuard)
+import { RolesGuard } from 'src/modules/auth/roles.guard';
+import 'multer';
+import { JwtAuthGuard } from 'src/modules/auth/jwt-auth-guard';
+
+export interface IUploadedFile {
+  fieldname: string;
+  originalname: string;
+  encoding: string;
+  mimetype: string;
+  size: number;
+  buffer: Buffer;
+}
+
+@UseGuards(JwtAuthGuard, RolesGuard)
 @Controller()
 export class CreateMedicalRecordController {
   constructor(
     private readonly createMedicalRecordUseCase: CreateMedicalRecordUseCase,
   ) { }
 
-  @Post('appointment')
+  @Post('medicalRecord')
   @Roles(UserRole.PATIENT)
-  async handle(@Body() body: CreateMedicalRecordDTO) {
-    const { document, patientId } = body;
+  @UseInterceptors(FileInterceptor('file'))
+  async handle(
+    @Body() body: { description: string },
+    @UploadedFile() file: Express.Multer.File,
+    @Req() req: any,
+  ) {
+    const patientId = req?.user?.sub;
 
     const result = await this.createMedicalRecordUseCase.execute({
-      document,
+      file,
       patientId,
     });
 
