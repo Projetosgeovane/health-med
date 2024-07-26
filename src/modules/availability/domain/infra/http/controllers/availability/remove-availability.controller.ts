@@ -7,17 +7,15 @@ import {
   HttpCode,
   Param,
   Req,
+  UseGuards,
 } from '@nestjs/common';
+import { UserRole } from '@prisma/client';
+import { JwtAuthGuard } from 'src/modules/auth/jwt-auth-guard';
+import { Roles } from 'src/modules/auth/roles.decorator';
+import { RolesGuard } from 'src/modules/auth/roles.guard';
 import { RemoveAvailabilityUseCase } from 'src/modules/availability/domain/application/use-cases/availability/remove-availability.use-case';
 
-interface User {
-  id: string;
-}
-
-interface CustomRequest extends Request {
-  user: User;
-}
-
+@UseGuards(JwtAuthGuard, RolesGuard)
 @Controller()
 export class RemoveAvailabilityController {
   constructor(
@@ -25,9 +23,10 @@ export class RemoveAvailabilityController {
   ) { }
 
   @Delete('availabilities/:id')
+  @Roles(UserRole.DOCTOR)
   @HttpCode(204)
-  async handle(@Param('id') id: string, @Req() req: CustomRequest) {
-    const doctorId = req.user.id;
+  async handle(@Param('id') id: string, @Req() req: any) {
+    const doctorId = req.user.sub;
     const result = await this.removeAvailabilityUseCase.execute({
       id,
       doctorId,

@@ -8,7 +8,7 @@ export class PrismaAvailabilityMapper {
       {
         date: raw.date,
         time: raw.time,
-        userId: raw.userId,
+        doctorId: raw.doctorId,
         createdAt: raw.createdAt,
         updatedAt: raw.updatedAt,
         deletedAt: raw.deletedAt,
@@ -26,7 +26,7 @@ export class PrismaAvailabilityMapper {
       id: availability.id.toValue(),
       date: availability.date,
       time: availability.time,
-      userId: availability.userId,
+      doctorId: availability.doctorId,
       createdAt: availability.createdAt,
       updatedAt: availability.updatedAt,
       deletedAt: availability.deletedAt,

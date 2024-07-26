@@ -31,7 +31,7 @@ export class EditAvailabilityUseCase {
       return failure(new ResourceNotFoundError('Availability not found'));
     }
 
-    if (availability.userId !== doctorId) {
+    if (availability.doctorId !== doctorId) {
       throw new UnauthorizedException(
         `You are not authorized to update this availability`,
       );

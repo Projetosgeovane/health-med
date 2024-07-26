@@ -4,6 +4,7 @@ import {
   ConflictException,
   Controller,
   Post,
+  Req,
   UseGuards,
 } from '@nestjs/common';
 import { CreateAvailabilityUseCase } from '../../../../application/use-cases/availability/create-availability.use-case';
@@ -23,13 +24,14 @@ export class CreateAvailabilityController {
 
   @Post('availability')
   @Roles(UserRole.DOCTOR)
-  async handle(@Body() body: CreateAvailabilityDTO) {
-    const { date, time, userId } = body;
+  async handle(@Body() body: CreateAvailabilityDTO, @Req() req: any) {
+    const { date, time } = body;
+    const doctorId = req?.user?.sub;
 
     const result = await this.createAvailabilityUseCase.execute({
       date,
       time,
-      userId,
+      doctorId,
     });
 
     if (result.isFailure()) {

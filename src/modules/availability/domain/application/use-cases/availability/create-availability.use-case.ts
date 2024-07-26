@@ -7,7 +7,7 @@ import { AvailabilityEntity } from '../../../enterprise/availability.entity';
 interface AvailabilityRequest {
   date: string;
   time: string;
-  userId: string;
+  doctorId: string;
 }
 
 type AvailabilityResponse = Either<ResourceExistsError, object>;
@@ -21,12 +21,12 @@ export class CreateAvailabilityUseCase {
   async execute({
     date,
     time,
-    userId,
+    doctorId,
   }: AvailabilityRequest): Promise<AvailabilityResponse> {
     const availability = AvailabilityEntity.instance({
       date,
       time,
-      userId,
+      doctorId,
     });
 
     await this.availabilityRepository.create(availability);

@@ -6,7 +6,7 @@ export class AvailabilityPresenter {
       id: availability.id.toValue(),
       date: availability.date,
       time: availability.time,
-      userId: availability.userId,
+      doctorId: availability.doctorId,
 
       createdAt: availability.createdAt,
       updatedAt: availability.updatedAt,

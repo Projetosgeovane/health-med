@@ -28,7 +28,7 @@ export class RemoveAvailabilityUseCase {
       );
     }
 
-    if (availability.userId !== doctorId) {
+    if (availability.doctorId !== doctorId) {
       return failure(
         new UnableRemoveError(
           `Doctor id '${doctorId}' does not have permission to remove availability id '${id}'`,

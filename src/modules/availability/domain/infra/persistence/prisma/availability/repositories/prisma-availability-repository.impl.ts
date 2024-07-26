@@ -21,7 +21,7 @@ export class PrismaAvailabilityRepositoryImpl
     const [availabilitys, totalRecords] = await this.prisma.$transaction([
       this.prisma.availability.findMany({
         where: {
-          OR: param ? [{ userId: { contains: param } }] : undefined,
+          OR: param ? [{ doctorId: { contains: param } }] : undefined,
           deletedAt: null,
         },
         orderBy: {
@@ -32,7 +32,7 @@ export class PrismaAvailabilityRepositoryImpl
       }),
       this.prisma.availability.count({
         where: {
-          OR: param ? [{ userId: { contains: param } }] : undefined,
+          OR: param ? [{ doctorId: { contains: param } }] : undefined,
           deletedAt: null,
         },
       }),

@@ -4,7 +4,7 @@ import { Optional } from 'libs/core/src/types';
 export interface AvailabilityEntityProps {
   date: string;
   time: string;
-  userId: string;
+  doctorId: string;
 
   createdAt: Date;
   updatedAt?: Date | null;
@@ -20,7 +20,7 @@ export class AvailabilityEntity extends Entity<AvailabilityEntityProps> {
       {
         date: props.date ?? null,
         time: props.time ?? null,
-        userId: props.userId ?? null,
+        doctorId: props.doctorId ?? null,
         createdAt: new Date(),
         updatedAt: props.updatedAt ?? null,
         deletedAt: props.deletedAt ?? null,
@@ -40,8 +40,8 @@ export class AvailabilityEntity extends Entity<AvailabilityEntityProps> {
     return this.props.time;
   }
 
-  get userId() {
-    return this.props.userId;
+  get doctorId() {
+    return this.props.doctorId;
   }
 
   get createdAt() {
@@ -70,8 +70,8 @@ export class AvailabilityEntity extends Entity<AvailabilityEntityProps> {
     this.touch();
   }
 
-  set userId(userId: string) {
-    this.props.userId = userId;
+  set doctorId(doctorId: string) {
+    this.props.doctorId = doctorId;
     this.touch();
   }
 
