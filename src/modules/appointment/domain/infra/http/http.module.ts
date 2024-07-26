@@ -12,6 +12,8 @@ import { UpdateAppointmentCancelController } from './controllers/update-appointm
 import { UpdateAppointmentStatusController } from './controllers/update-appointment-status.controller';
 import { UpdateAppointmentCancelUseCase } from '../../application/use-cases/appointment/update-appointment-cancel.use-case';
 import { UpdateAppointmentStatusUseCase } from '../../application/use-cases/appointment/update-appointment-status.use-case';
+import { FetchAppointmentByPatientController } from './controllers/fetch-appointments-by-patient.controller';
+import { FetchAppointmentByPatientUseCase } from '../../application/use-cases/appointment/fetch-appointment-by-patient.use-case';
 
 @Module({
   imports: [AppointmentPersistenceModule],
@@ -20,6 +22,7 @@ import { UpdateAppointmentStatusUseCase } from '../../application/use-cases/appo
     FetchAppointmentByIdController,
     FetchAppointmentsController,
     FetchAppointmentByDoctorController,
+    FetchAppointmentByPatientController,
     UpdateAppointmentCancelController,
     UpdateAppointmentStatusController,
   ],
@@ -28,6 +31,7 @@ import { UpdateAppointmentStatusUseCase } from '../../application/use-cases/appo
     FetchAppointmentByIdUseCase,
     FetchAppointmentsUseCase,
     FetchAppointmentByDoctorUseCase,
+    FetchAppointmentByPatientUseCase,
     UpdateAppointmentCancelUseCase,
     UpdateAppointmentStatusUseCase,
   ],

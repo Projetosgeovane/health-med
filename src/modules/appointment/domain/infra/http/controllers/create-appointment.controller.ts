@@ -4,6 +4,7 @@ import {
   ConflictException,
   Controller,
   Post,
+  Req,
   UseGuards,
 } from '@nestjs/common';
 import { CreateAppointmentUseCase } from '../../../application/use-cases/appointment/create-appointment.use-case';
@@ -21,8 +22,9 @@ export class CreateAppointmentController {
 
   @Post('appointment')
   @Roles('PATIENT')
-  async handle(@Body() body: CreateAppointmentDTO) {
-    const { date, time, status, doctorId, patientId } = body;
+  async handle(@Body() body: CreateAppointmentDTO, @Req() req: any) {
+    const { date, time, status, doctorId } = body;
+    const patientId = req?.user?.sub;
 
     const result = await this.createAppointmentUseCase.execute({
       date,

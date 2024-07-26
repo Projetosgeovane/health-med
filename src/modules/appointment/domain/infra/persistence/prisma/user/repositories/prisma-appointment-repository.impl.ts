@@ -38,6 +38,33 @@ export class PrismaAppointmentRepositoryImpl implements AppointmentRepository {
     };
   }
 
+  async findByPatient({ patientID, page, perPage }): Promise<any> {
+    const [appointments, totalRecords] = await this.prisma.$transaction([
+      this.prisma.appointment.findMany({
+        where: {
+          patientId: patientID || undefined,
+          deletedAt: null,
+        },
+        orderBy: {
+          createdAt: 'desc',
+        },
+        take: perPage,
+        skip: (page - 1) * perPage,
+      }),
+      this.prisma.appointment.count({
+        where: {
+          patientId: patientID || undefined,
+          deletedAt: null,
+        },
+      }),
+    ]);
+
+    return {
+      appointments: appointments.map(PrismaAppointmentMapper.toDomain),
+      totalRecords,
+    };
+  }
+
   async findMany({
     page,
     param,

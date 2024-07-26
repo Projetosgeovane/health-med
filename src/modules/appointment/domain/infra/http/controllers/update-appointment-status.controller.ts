@@ -7,9 +7,14 @@ import {
   NotFoundException,
   Param,
   Patch,
+  UseGuards,
 } from '@nestjs/common';
 import { UpdateAppointmentStatusUseCase } from '../../../application/use-cases/appointment/update-appointment-status.use-case';
+import { JwtAuthGuard } from 'src/modules/auth/jwt-auth-guard';
+import { RolesGuard } from 'src/modules/auth/roles.guard';
+import { Roles } from 'src/modules/auth/roles.decorator';
 
+@UseGuards(JwtAuthGuard, RolesGuard)
 @Controller()
 export class UpdateAppointmentStatusController {
   constructor(
@@ -17,6 +22,7 @@ export class UpdateAppointmentStatusController {
   ) { }
 
   @Patch('appointments/:id/status')
+  @Roles('DOCTOR')
   @HttpCode(204)
   async handle(
     @Param('id') appointmentID: string,
