@@ -38,23 +38,23 @@ model Availability {
   createdAt DateTime  @default(now()) @map("created_at")
   updatedAt DateTime? @updatedAt @map("updated_at")
   deletedAt DateTime? @map("deleted_at")
-  userId    String
-  user      User      @relation(fields: [userId], references: [id])
+  doctorId  String
+  user      User      @relation(fields: [doctorId], references: [id])
 }
 
 model Appointment {
-  id                 String    @id @default(uuid())
-  date               String
-  time               String
-  status             String
-  cancellationReason String?
-  createdAt          DateTime  @default(now()) @map("created_at")
-  updatedAt          DateTime? @updatedAt @map("updated_at")
-  deletedAt          DateTime? @map("deleted_at")
-  doctorId           String
-  patientId          String
-  doctor             User      @relation(name: "DoctorAppointments", fields: [doctorId], references: [id])
-  patient            User      @relation(name: "PatientAppointments", fields: [patientId], references: [id])
+  id           String    @id @default(uuid())
+  date         String
+  time         String
+  status       String
+  cancelReason String?
+  createdAt    DateTime  @default(now()) @map("created_at")
+  updatedAt    DateTime? @updatedAt @map("updated_at")
+  deletedAt    DateTime? @map("deleted_at")
+  doctorId     String
+  patientId    String
+  doctor       User      @relation(name: "DoctorAppointments", fields: [doctorId], references: [id])
+  patient      User      @relation(name: "PatientAppointments", fields: [patientId], references: [id])
 }
 
 model MedicalRecord {
