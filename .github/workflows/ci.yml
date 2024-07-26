@@ -60,3 +60,6 @@ jobs:
 
       - name: Apply Kubernetes manifests
         run: kubectl apply -f k8s/app.yaml
+
+      - name: Force rollout restart to ensure new image is used
+        run: kubectl rollout restart deployment/app
