@@ -6,6 +6,8 @@ import { FetchMedicalRecordsController } from './controllers/medicalRecord/fetch
 import { FetchMedicalRecordByIdController } from './controllers/medicalRecord/fetch-medicalRecord-by-id.controller';
 import { FetchMedicalRecordByIdUseCase } from '../../application/use-cases/medicalRecord/fetch-medicalRecord-by-id.use-case';
 import { FetchMedicalRecordsUseCase } from '../../application/use-cases/medicalRecord/fetch-medicalRecords.use-case';
+import { FetchMedicalRecordByPatientController } from './controllers/medicalRecord/fetch-medicalRecords-by-patient.controller';
+import { FetchMedicalRecordByPatientUseCase } from '../../application/use-cases/medicalRecord/fetch-medicalRecord-by-doctor.use-case';
 
 @Module({
   imports: [MedicalRecordPersistenceModule],
@@ -13,11 +15,13 @@ import { FetchMedicalRecordsUseCase } from '../../application/use-cases/medicalR
     CreateMedicalRecordController,
     FetchMedicalRecordByIdController,
     FetchMedicalRecordsController,
+    FetchMedicalRecordByPatientController,
   ],
   providers: [
     CreateMedicalRecordUseCase,
     FetchMedicalRecordByIdUseCase,
     FetchMedicalRecordsUseCase,
+    FetchMedicalRecordByPatientUseCase,
   ],
 })
 export class MedicalRecordHttpModule { }

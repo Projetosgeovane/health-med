@@ -6,7 +6,13 @@ export interface MedicalRecordPaginationProps {
   perPage: number;
   param: string;
 }
+export interface MedicalRecordPatientPatientProps {
+  page: number;
+  perPage: number;
+  patientID: string;
+}
 
 export abstract class MedicalRecordRepository extends BaseRepository<MedicalRecordEntity> {
   abstract findMany(params: MedicalRecordPaginationProps);
+  abstract findByPatient(doctpatientIDorID: MedicalRecordPatientPatientProps);
 }

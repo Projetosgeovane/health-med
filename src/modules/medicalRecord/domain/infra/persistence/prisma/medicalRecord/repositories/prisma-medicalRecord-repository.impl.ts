@@ -12,6 +12,33 @@ export class PrismaMedicalRecordRepositoryImpl
   implements MedicalRecordRepository {
   constructor(private readonly prisma: PrismaService) { }
 
+  async findByPatient({ patientID, page, perPage }): Promise<any> {
+    const [medicalRecords, totalRecords] = await this.prisma.$transaction([
+      this.prisma.medicalRecord.findMany({
+        where: {
+          patientId: patientID || undefined,
+          deletedAt: null,
+        },
+        orderBy: {
+          createdAt: 'desc',
+        },
+        take: perPage,
+        skip: (page - 1) * perPage,
+      }),
+      this.prisma.medicalRecord.count({
+        where: {
+          patientId: patientID || undefined,
+          deletedAt: null,
+        },
+      }),
+    ]);
+
+    return {
+      medicalRecords: medicalRecords.map(PrismaMedicalRecordMapper.toDomain),
+      totalRecords,
+    };
+  }
+
   async findMany({
     page,
     param,
