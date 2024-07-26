@@ -26,7 +26,7 @@ export class FetchMedicalRecordByPatientController {
 
   @Get('medicalRecord/patient/:id')
   @HttpCode(200)
-  @Roles(UserRole.DOCTOR)
+  @Roles(UserRole.PATIENT)
   async handle(
     @Query('page', ParseIntPipe) page: number,
     @Query('perPage', ParseIntPipe) perPage: number,
