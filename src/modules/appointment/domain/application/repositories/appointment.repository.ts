@@ -12,8 +12,14 @@ export interface AppointmentDoctorProps {
   perPage: number;
   doctorID: string;
 }
+export interface AppointmentPatientProps {
+  page: number;
+  perPage: number;
+  patientID: string;
+}
 
 export abstract class AppointmentRepository extends BaseRepository<AppointmentEntity> {
   abstract findMany(params: AppointmentPaginationProps);
   abstract findByDoctor(doctorID: AppointmentDoctorProps);
+  abstract findByPatient(patientID: AppointmentPatientProps);
 }
