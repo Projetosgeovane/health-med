@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
-import { AvailabilityHttpModule } from './infra/http/http.module';
 import { AvailabilityPersistenceModule } from './infra/persistence/persistence.module';
+import { AvailabilityHttpModule } from './infra/http/presenters/http.module';
 
 @Module({
   imports: [AvailabilityHttpModule, AvailabilityPersistenceModule],

@@ -16,7 +16,7 @@ export class AvailabilityEntity extends Entity<AvailabilityEntityProps> {
     props: Optional<AvailabilityEntityProps, 'createdAt'>,
     id?: UniqueEntityID,
   ) {
-    const user = new AvailabilityEntity(
+    const availability = new AvailabilityEntity(
       {
         date: props.date ?? null,
         time: props.time ?? null,
@@ -29,7 +29,7 @@ export class AvailabilityEntity extends Entity<AvailabilityEntityProps> {
       id,
     );
 
-    return user;
+    return availability;
   }
 
   get date() {
