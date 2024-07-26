@@ -12,8 +12,9 @@ import { AvailabilityPresenter } from '../../presenters/availability.presenter';
 import { Roles } from 'src/modules/auth/roles.decorator';
 import { UserRole } from '@prisma/client';
 import { RolesGuard } from 'src/modules/auth/roles.guard';
+import { JwtAuthGuard } from 'src/modules/auth/jwt-auth-guard';
 
-@UseGuards(RolesGuard)
+@UseGuards(JwtAuthGuard, RolesGuard)
 @Controller('availabilitys')
 export class FetchAvailabilitysController {
   constructor(

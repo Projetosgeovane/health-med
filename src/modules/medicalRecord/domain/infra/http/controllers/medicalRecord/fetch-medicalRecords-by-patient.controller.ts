@@ -16,7 +16,8 @@ import { Roles } from 'src/modules/auth/roles.decorator';
 import { UserRole } from '@prisma/client';
 import { MedicalRecordPresenter } from '../../presenters/medicalRecord.presenter';
 import { FetchMedicalRecordByPatientUseCase } from 'src/modules/medicalRecord/domain/application/use-cases/medicalRecord/fetch-medicalRecord-by-doctor.use-case';
-@UseGuards(RolesGuard)
+import { JwtAuthGuard } from 'src/modules/auth/jwt-auth-guard';
+@UseGuards(JwtAuthGuard, RolesGuard)
 @Controller()
 export class FetchMedicalRecordByPatientController {
   constructor(

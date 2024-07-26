@@ -10,8 +10,9 @@ import {
 import { FetchAppointmentsUseCase } from 'src/modules/appointment/domain/application/use-cases/appointment/fetch-appointments.use-case';
 import { AppointmentPresenter } from '../presenters/appointment.presenter';
 import { RolesGuard } from 'src/modules/auth/roles.guard';
+import { JwtAuthGuard } from 'src/modules/auth/jwt-auth-guard';
 
-@UseGuards(RolesGuard)
+@UseGuards(JwtAuthGuard, RolesGuard)
 @Controller()
 export class FetchAppointmentsController {
   constructor(

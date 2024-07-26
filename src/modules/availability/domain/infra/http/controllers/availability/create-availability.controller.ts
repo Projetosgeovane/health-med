@@ -12,8 +12,9 @@ import { CreateAvailabilityDTO } from '../../dtos/availability/create-availabili
 import { RolesGuard } from 'src/modules/auth/roles.guard';
 import { Roles } from 'src/modules/auth/roles.decorator';
 import { UserRole } from '@prisma/client';
+import { JwtAuthGuard } from 'src/modules/auth/jwt-auth-guard';
 
-@UseGuards(RolesGuard)
+@UseGuards(JwtAuthGuard, RolesGuard)
 @Controller()
 export class CreateAvailabilityController {
   constructor(

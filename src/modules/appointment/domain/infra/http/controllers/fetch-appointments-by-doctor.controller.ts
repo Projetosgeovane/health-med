@@ -15,7 +15,8 @@ import { FetchAppointmentByDoctorUseCase } from '../../../application/use-cases/
 import { RolesGuard } from 'src/modules/auth/roles.guard';
 import { Roles } from 'src/modules/auth/roles.decorator';
 import { UserRole } from '@prisma/client';
-@UseGuards(RolesGuard)
+import { JwtAuthGuard } from 'src/modules/auth/jwt-auth-guard';
+@UseGuards(JwtAuthGuard, RolesGuard)
 @Controller()
 export class FetchAppointmentByDoctorController {
   constructor(

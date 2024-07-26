@@ -13,7 +13,8 @@ import { MedicalRecordPresenter } from '../../presenters/medicalRecord.presenter
 import { Roles } from 'src/modules/auth/roles.decorator';
 import { UserRole } from '@prisma/client';
 import { RolesGuard } from 'src/modules/auth/roles.guard';
-@UseGuards(RolesGuard)
+import { JwtAuthGuard } from 'src/modules/auth/jwt-auth-guard';
+@UseGuards(JwtAuthGuard, RolesGuard)
 @Controller()
 export class FetchMedicalRecordByIdController {
   constructor(
