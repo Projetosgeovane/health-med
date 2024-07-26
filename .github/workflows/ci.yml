@@ -52,7 +52,7 @@ jobs:
           aws-region: us-east-1
 
       - name: Update kubeconfig
-        run: aws eks update-kubeconfig --name your-cluster-name --region us-east-1
+        run: aws eks update-kubeconfig --name health-med --region us-east-1
 
       - name: Apply Kubernetes manifests
         run: kubectl apply -f k8s/app.yaml
