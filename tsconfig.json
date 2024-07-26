@@ -32,7 +32,6 @@
     },
     "types": [
       "vitest/globals",
-      "Multer",
       "node"
     ]
   },
