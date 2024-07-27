@@ -25,6 +25,7 @@ export class CreateAppointmentUseCase {
     doctorId,
     patientId,
   }: AppointmentRequest): Promise<AppointmentResponse> {
+    console.log('CreateAppointmentUseCase');
     const appointment = AppointmentEntity.instance({
       date,
       time,
